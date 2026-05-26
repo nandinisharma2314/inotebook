@@ -29,10 +29,17 @@ const Notes = (props) => {
     }
 
     const handleClick = (e) => {
-        editNote(note.id, note.etitle, note.edescription, note.etag)
-        refClose.current.click();
-        props.showAlert("Updated Successfully", "success");
-    }
+    e.preventDefault();
+
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+
+    // remove focus before closing modal
+    document.activeElement.blur();
+
+    refClose.current.click();
+
+    props.showAlert("Updated Successfully", "success");
+}
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
