@@ -9,7 +9,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     Navigate("/login");
-    window.location.reload();
+  
   };
 
   return (
