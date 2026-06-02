@@ -10,7 +10,7 @@ const Signup = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:5000/api/auth/", {
+        const response = await fetch("https://inotebook-backend1-z7j4.onrender.com/api/auth/", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

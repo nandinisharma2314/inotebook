@@ -1,4 +1,4 @@
-import react, { use, useState } from 'react';
+import react, {  useState } from 'react';
 import NoteContext from './noteContext';
 
 const NoteState = (props) => {
@@ -8,8 +8,10 @@ const NoteState = (props) => {
 
 
     // Get all Notes
-    const getNotes = async () => {
-        // API Call 
+const getNotes = async () => {
+
+    try {
+
         const response = await fetch(`${host}/api/notes/fetchnotes`, {
             method: 'GET',
             headers: {
@@ -17,9 +19,27 @@ const NoteState = (props) => {
                 "auth-token": localStorage.getItem('token')
             }
         });
-        const json = await response.json()
-        setNotes(json)
+
+        // Handle unauthorized response
+        if (!response.ok) {
+            setNotes([]);
+            return;
+        }
+
+        const json = await response.json();
+
+        // Ensure response is array
+        if (Array.isArray(json)) {
+            setNotes(json);
+        } else {
+            setNotes([]);
+        }
+
+    } catch (error) {
+        console.error(error);
+        setNotes([]);
     }
+}
     // Add a Note
     const addNote = async (title, description, tag) => {
         // TODO: API Call

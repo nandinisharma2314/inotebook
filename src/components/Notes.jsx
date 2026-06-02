@@ -116,7 +116,7 @@ const Notes = (props) => {
                         </div>
                     )}
                 </div>
-                {notes.map((note) => {
+               {Array.isArray(notes) && notes.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert} />
                 })}
             </div>

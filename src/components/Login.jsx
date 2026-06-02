@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" })
     let Navigate = useNavigate();
-
+const host = "https://inotebook-backend1-z7j4.onrender.com";
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:5000/api/auth/login", {
+        const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
